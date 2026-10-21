@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Renata Lopes | Massoterapia e Estética</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(180deg, #fce4ec 0%, #f8bbd0 50%, #fff3e0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 16px;
+            font-family: 'Montserrat', sans-serif;
+            color: #4a2e35;
+        }
+
+        /* Card Principal */
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 32px 20px;
+            text-align: center;
+            border: 2px solid #bf953f;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
+        }
+
+        /* Foto de Perfil */
+        .profile-box {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px auto;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #e589a6, #b38728);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffffff;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #8c5d38;
+            margin-bottom: 4px;
+        }
+
+        .tagline {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c2597d;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #6e5259;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        /* Seção de Botões */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        /* Botão Destaque (Agendamento) */
+        .btn-booking {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #e589a6 100%);
+            color: #3d2111 !important;
+            border: none;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Botões Padrão */
+        .btn-default {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            background: #fff0f5;
+            color: #4a2e35 !important;
+            border: 1.5px solid #e589a6;
+            cursor: pointer;
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-content i {
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+            color: #c2597d;
+        }
+
+        .btn-booking .btn-content i {
+            color: #3d2111;
+        }
+
+        .arrow {
+            font-size: 12px;
+            color: #b38728;
+        }
+
+        .btn-booking .arrow {
+            color: #3d2111;
+        }
+
+        /* Modal do Wi-Fi */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 24px 20px;
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+            position: relative;
+            border: 2px solid #bf953f;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: none;
+            border: none;
+            color: #c2597d;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .wifi-icon {
+            font-size: 32px;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+
+        .wifi-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            color: #8c5d38;
+            margin-bottom: 14px;
+        }
+
+        .info-box {
+            background: #fff0f5;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(229, 137, 166, 0.3);
+            font-size: 13px;
+        }
+
+        .info-box span {
+            display: block;
+            color: #c2597d;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+            font-weight: 700;
+        }
+
+        .copy-button {
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%);
+            color: #3d2111;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        footer {
+            font-size: 11px;
+            color: #9e7a85;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Foto de Capa -->
+        <div class="profile-box">
+            <img src="https://i.postimg.cc/4xRcZNYk/06adc6d6-7aac-4cbb-bc8c-ef5149874542.jpg" alt="Studio Renata Lopes" class="profile-img">
+        </div>
+        
+        <!-- Títulos -->
+        <h1>Studio Renata Lopes</h1>
+        <p class="tagline">Massoterapia e Estética</p>
+        <p class="subtitle">Realçando sua beleza natural com tratamentos exclusivos. Escolha uma opção abaixo:</p>
+
+        <!-- Links -->
+        <div class="links-container">
+            
+            <!-- Agendamento -->
+            <a href="https://renatalopesestetica.tuaagenda.app" class="btn-booking" target="_blank" rel="noopener noreferrer">
+                <div class="btn-content">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Fazer Agendamento Online</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/554288166076" class="btn-default" target="_blank" rel="noopener noreferrer">
+                <div class="btn-content">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Falar no WhatsApp</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/studiorenatalopes.oficial" class="btn-default" target="_blank" rel="noopener noreferrer">
+                <div class="btn-content">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Acompanhar no Instagram</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <!-- Avaliação Google -->
+            <a href="https://search.google.com/local/writereview?placeid=ChIJZYHzgUonSAcRtI58y_Ap-g4" class="btn-default" target="_blank" rel="noopener noreferrer">
+                <div class="btn-content">
+                    <i class="fa-solid fa-star" style="color: #d4af37;"></i>
+                    <span>Deixar Avaliação no Google</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <!-- Google Maps -->
+            <a href="https://maps.google.com/maps/place//data=!4m2!3m1!1s0x748274a81f38165:0xefa29f0cb7c8eb4?entry=s&sa=X&ved=2ahUKEwjS6eOR7MuXAxVcrpUCHekSO4QQ4kB6BAgEEAA&hl=pt" class="btn-default" target="_blank" rel="noopener noreferrer">
+                <div class="btn-content">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Ver Localização (Google Maps)</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <!-- Wi-Fi -->
+            <div class="btn-default" onclick="toggleWifiModal(true)">
+                <div class="btn-content">
+                    <i class="fa-solid fa-wifi"></i>
+                    <span>Internet Wi-Fi do Studio</span>
+                </div>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </div>
+
+        </div>
+
+        <footer>
+            Studio Renata Lopes • Todos os direitos reservados
+        </footer>
+    </div>
+
+    <!-- Modal Wi-Fi -->
+    <div class="modal" id="wifiModal" onclick="toggleWifiModal(false)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="toggleWifiModal(false)">&times;</button>
+            <i class="fa-solid fa-wifi wifi-icon"></i>
+            <h2 class="wifi-title">Wi-Fi do Studio</h2>
+            
+            <div class="info-box">
+                <span>Nome da Rede</span>
+                <strong style="color: #4a2e35; font-size: 15px;">Renata</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Senha da Rede</span>
+                <strong id="wifiPassword" style="color: #8c5d38; font-size: 16px;">renatalopes</strong>
+            </div>
+
+            <button class="copy-button" id="copyBtn" onclick="copyWifiPassword()">
+                <i class="fa-solid fa-copy"></i> Copiar Senha
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleWifiModal(show) {
+            const modal = document.getElementById('wifiModal');
+            if (show) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        }
+
+        function copyWifiPassword() {
+            const pass = document.getElementById('wifiPassword').innerText;
+            navigator.clipboard.writeText(pass).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Senha Copiada!';
+                btn.style.background = '#25d366';
+                btn.style.color = '#ffffff';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-copy"></i> Copiar Senha';
+                    btn.style.background = 'linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%)';
+                    btn.style.color = '#3d2111';
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
